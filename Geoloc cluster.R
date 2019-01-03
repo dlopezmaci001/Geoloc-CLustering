@@ -1,6 +1,10 @@
-# Clustering
 
-install.packages("ggmap")
+#https://www.youtube.com/watch?v=ePfX6a7rsis&feature=youtu.be
+
+### Clustering 
+
+#install.packages("NbClust")
+#install.packages("factoextra")
 library(ggmap)
 library(tidyverse)
 library(dplyr)
@@ -11,7 +15,7 @@ library(readxl)
 
 # Load data 
 
-df <- read_xlsx("C:/Users/Daniel/Desktop/Nimerya/TKDSalesRegion4.xlsx")
+df <- read.xlsx("C:/Users/daniel.lopez/Desktop/IE/TKDSalesRegion4.xlsx")
 
 
 # Determine optimal number of clusters
@@ -89,14 +93,31 @@ df.map_locations["size1"]<- tibble(size1= c(ifelse(df.map_locations$Sales < 5000
 
 # We write out data to prevent the code from messing up
 
-write.xlsx(df.map_locations,"C:/Users/Daniel/Desktop/Nimerya/Sales region 50K.xlxs")
+write.xlsx(df.map_locations,"C:/Users/daniel.lopez/Desktop/IE/Sales region 50K.xlsx")
 
-df_map <- read.xlsx("C:/Users/Daniel/Desktop/Nimerya/Sales region 50K.xlxs")
+df_map <- read.xlsx("C:/Users/daniel.lopez/Desktop/IE/Sales region 50K.xlsx")
 
 # Map the data in google maps
 
 salesamt <- df.map_locations$size1
 
+madmap <- get_map(location= c(lon=-3.705722,lat=40.416947),zoom="auto",key,scale="auto"
+                  ,maptype = "hybrid",
+                  source = "osm",
+                  filename = "ggmapTemp",messaging = FALSE,  urlonly = FALSE,api_key)
+
+paste("&",key)
 
 
+df_map <- as.data.frame(lapply(df.map_locations, unlist))
+df2[order(df2[, 5]), ]
+
+madmap <- get_googlemap(center=c(lon=-3.705722,lat=40.416947),zoom=10,size = c(640, 640), scale = 2,maptype = "terrain",sensor = FALSE,
+              filename = "ggmapTemp",force=FALSE,key = key)
+
+ggmap(madmap) + geom_point(aes(x=lon,y=lat
+                               ,colour=as.factor(clusters),size=salesamt),data=df.map_locations)+ggtitle("Madrid Region")
+
+lat <- c(df.map_locations$lat)
+lon <- c(df.map_locations$lon)
 
