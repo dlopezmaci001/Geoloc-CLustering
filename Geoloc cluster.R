@@ -45,7 +45,7 @@ fviz_nbclust(test1,kmeans,nstart=20,method = "gap_stat",nboot=50)+
 fviz_nbclust(test1,kmeans,method = "silhouette")+
   labs(subtitle = "silhouette") # Optimal is 2 followed by 2,3 and 4
 
-# the one that appears most is nº4 for so let's take 4 (wss tends to be the best at evaluation)
+# the one that appears most is nÂº4 for so let's take 4 (wss tends to be the best at evaluation)
 
 ##############################Performing k means cluster analysis ###################################################
 
@@ -97,6 +97,6 @@ df_map <- read.xlsx("C:/Users/Daniel/Desktop/Nimerya/Sales region 50K.xlxs")
 
 salesamt <- df.map_locations$size1
 
-register_google(key='AIzaSyAHdza9HVhCwR7zSepGj3Spx4yeO9KTykc')
+
 
 
